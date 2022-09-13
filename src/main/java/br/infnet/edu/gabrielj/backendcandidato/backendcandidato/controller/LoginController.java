@@ -30,7 +30,6 @@ public class LoginController {
 
     @PostMapping("/cadastrar")
     public Usuario cadastrarCandidato(@RequestBody Usuario usuario) {
-
         if (isFieldsMissing(usuario)) {
             var add = repository.findAll().size() + 1;
             usuario.setIdUsuario(add);
