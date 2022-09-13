@@ -1,0 +1,11 @@
+### GET request with a header
+GET http://localhost:8082/login
+
+### add
+POST http://localhost:8082/login/cadastrar
+Content-Type: application/json
+
+{
+  "login": "2",
+  "password": "22"
+}
