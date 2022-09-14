@@ -10,13 +10,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "usuario")
+@MappedSuperclass
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long idUsuario;
 
     private String login;
