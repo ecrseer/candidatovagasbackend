@@ -17,8 +17,8 @@ public class Candidato extends Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long idCandidato;
-
-
     long cpf;
+    final String tipo="C";
+
 }
 

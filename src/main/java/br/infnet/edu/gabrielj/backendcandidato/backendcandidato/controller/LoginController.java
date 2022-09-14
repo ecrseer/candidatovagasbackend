@@ -34,15 +34,15 @@ public class LoginController {
             var add = repository.findAll().size() + 1;
             usuario.setIdUsuario(add);
         }
-        var usr = repository.save(usuario);
+        Candidato usr = repository.save(usuario);
         return usr;
 
     }
 
     @PostMapping("/logar")
-    public ResponseEntity<Candidato> logarUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Candidato> logarUsuario(@RequestBody Candidato usuario) {
 
-        var foundUser = repository.findCandidatoByLogin(usuario.getLogin());
+        Candidato foundUser = repository.findCandidatoByLogin(usuario.getLogin());
         System.out.println("find foundUser " + foundUser);
         if (foundUser != null) {
             boolean isPasswordCorrect = foundUser.getPassword().equals(usuario.getPassword());
