@@ -1,11 +1,39 @@
-### GET request with a header
-GET http://localhost:8082/login
+### GET Candidatos
+GET http://localhost:8082/loginCandidato
 
-### add
-POST http://localhost:8082/login/cadastrar
+### add Candidatos
+POST http://localhost:8082/loginCandidato/cadastrar
 Content-Type: application/json
 
 {
-  "login": "2",
+  "login": "CAN",
   "password": "22"
+}
+
+### add Candidatos
+POST http://localhost:8082/respostaVaga/responder
+Content-Type: application/json
+
+{
+  "vaga": {
+    "idVaga": 2,
+    "cargo": "ADVG",
+    "criterios": [
+      {
+        "idCriterio": 3,
+        "descricao": "ETA",
+        "perfilMinimo": 4
+      }
+    ],
+    "respostaVagas": []
+  },
+  "candidato": {
+    "idUsuario": 4,
+    "login": "CAN",
+    "password": "22",
+    "cpf": 0,
+    "tipo": "C"
+  },
+  "respostas": "abcsd"
+
 }
