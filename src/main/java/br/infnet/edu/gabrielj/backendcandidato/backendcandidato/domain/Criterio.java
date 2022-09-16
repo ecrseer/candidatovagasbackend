@@ -23,6 +23,7 @@ public class Criterio implements Serializable {
     long idCriterio;
     String descricao;
     int perfilMinimo;
+    int peso;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vagaFk")

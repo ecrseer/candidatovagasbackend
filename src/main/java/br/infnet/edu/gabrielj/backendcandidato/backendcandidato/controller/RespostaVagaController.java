@@ -28,8 +28,8 @@ public class RespostaVagaController {
     @PostMapping("/responder")
     public ResponseEntity<RespostaVaga> salvaResposta(@RequestBody RespostaVaga resposta) {
         RespostaVaga saved = repository.save(resposta);
-        return ResponseEntity.ok(saved);
 
+        return ResponseEntity.ok(saved);
     }
 
     @PostMapping("/logar")
