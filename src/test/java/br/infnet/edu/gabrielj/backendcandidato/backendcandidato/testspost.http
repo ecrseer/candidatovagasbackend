@@ -10,7 +10,7 @@ Content-Type: application/json
   "password": "22"
 }
 
-### add Candidatos
+### add respostaVaga
 POST http://localhost:8082/respostaVaga/responder
 Content-Type: application/json
 
