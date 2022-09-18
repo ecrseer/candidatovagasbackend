@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -15,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class RespostaVaga {
-
+public class RespostaVaga implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idRespostaVaga;
@@ -33,7 +34,7 @@ public class RespostaVaga {
 
     @OneToMany(mappedBy = "respostaCriterioFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "respostaCriterio")
+    @JsonManagedReference(value = "respostaCriterioFk")
     private List<Resposta> respostas;
 
 }
