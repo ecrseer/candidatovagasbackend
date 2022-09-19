@@ -49,33 +49,36 @@ public class RespostaVagaController {
                 respostaAvaga.getVagaFk(),
                 respostaAvaga.getCandidatoFk(), null);
 
-        RespostaVaga saved = repository.save(shallowClone);
+
+        try {
+            RespostaVaga saved = repository.save(respostaAvaga);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for (Resposta resposta :
                 respostaAvaga.getRespostas()) {
-            var shallowResposta = new Resposta(resposta.getIdResposta(),
-                    resposta.getCriterio(), resposta.getConhecimento(), shallowClone);
-            respostaRepository.save(resposta);
+
+            try {
+                var shallowResposta = new Resposta(resposta.getIdResposta(),
+                        resposta.getCriterioFk(), resposta.getConhecimento(), null);
+                respostaRepository.save(resposta);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 
 
         return ResponseEntity.ok().build();
     }
-
-    @PostMapping("/logar")
-    public ResponseEntity<Candidato> logarUsuario(@RequestBody Candidato usuario) {
+    @GetMapping("/respostas/${idCandidato}")
+    public ResponseEntity<List<RespostaVaga>> getVagasRespondidas(@PathVariable long idCandidato){
 
         Candidato foundUser = null;//repository.findCandidatoByLogin(usuario.getLogin());
-        System.out.println("find foundUser " + foundUser);
-        if (foundUser != null) {
-            boolean isPasswordCorrect = foundUser.getPassword().equals(usuario.getPassword());
-            if (isPasswordCorrect) {
-                return ResponseEntity.ok(foundUser);
-            }
-        }
+
 
         return ResponseEntity.notFound().build();
-
     }
+
 
 }

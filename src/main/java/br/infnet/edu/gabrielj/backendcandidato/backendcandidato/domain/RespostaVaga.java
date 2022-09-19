@@ -34,7 +34,7 @@ public class RespostaVaga implements Serializable {
 
     @OneToMany(mappedBy = "respostaCriterioFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "respostaCriterioFk")
+    @JsonManagedReference(value = "respostas")
     private List<Resposta> respostas;
 
 }

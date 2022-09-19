@@ -17,18 +17,21 @@ import java.io.Serializable;
 public class Resposta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long idResposta;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "criterioFK")
-    @JsonBackReference(value = "criterioFK")
-    @PrimaryKeyJoinColumn
-    Criterio criterio;
+
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "criterioFk")
+    @JsonBackReference(value = "criterioFk")
+    Criterio criterioFk;*/
+
+    long criterioFk;
 
     private int conhecimento;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "respostaCriterioFk")
-    @JsonBackReference(value = "respostaCriterioFk")
+    @JsonBackReference(value = "respostas")
     RespostaVaga respostaCriterioFk;
 }
