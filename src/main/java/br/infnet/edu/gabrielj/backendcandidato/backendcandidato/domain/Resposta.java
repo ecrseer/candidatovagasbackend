@@ -32,6 +32,6 @@ public class Resposta implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "respostaCriterioFk")
-    @JsonBackReference(value = "respostas")
+    @JsonBackReference(value = "respostaCriterioFk")
     RespostaVaga respostaCriterioFk;
 }

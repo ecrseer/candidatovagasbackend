@@ -71,10 +71,21 @@ public class RespostaVagaController {
 
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/respostas/${idCandidato}")
-    public ResponseEntity<List<RespostaVaga>> getVagasRespondidas(@PathVariable long idCandidato){
 
-        Candidato foundUser = null;//repository.findCandidatoByLogin(usuario.getLogin());
+    @GetMapping("/respostas/{idCandidato}")
+    public ResponseEntity<List<RespostaVaga>> getVagasRespondidas
+            (@PathVariable long idCandidato) {
+
+        try {
+            //long id = Long.parseLong(idCandidato);
+            List<RespostaVaga> respostasDoCandidato =
+                    repository.findAllByCandidatoFk_IdUsuario(idCandidato);
+            if (respostasDoCandidato != null) {
+                return ResponseEntity.ok(respostasDoCandidato);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         return ResponseEntity.notFound().build();
