@@ -20,9 +20,9 @@ public class RespostaVaga implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idRespostaVaga;
+    private long idRespostaVaga;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vagaFk")
     @JsonBackReference(value = "respostaVagas")
     private Vaga vagaFk;
@@ -34,7 +34,7 @@ public class RespostaVaga implements Serializable {
 
     @OneToMany(mappedBy = "respostaCriterioFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "respostaCriterioFk")
+    @JsonManagedReference
     private List<Resposta> respostas;
 
 }

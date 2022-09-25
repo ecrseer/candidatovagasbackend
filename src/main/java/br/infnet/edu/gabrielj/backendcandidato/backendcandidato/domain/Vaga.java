@@ -1,6 +1,7 @@
 package br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,13 +37,19 @@ public class Vaga implements Serializable {
 
     @OneToMany(mappedBy = "vagaFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "respostaVagas")
+    @JsonManagedReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     List<RespostaVaga> respostaVagas;
 
 
     public Vaga(long idVaga, String cargo) {
         this.idVaga = idVaga;
         this.cargo = cargo;
+    }
+
+    @Override
+    public String toString() {
+        return "idvaga=" + idVaga + "cargo=" + cargo;
     }
 
 }

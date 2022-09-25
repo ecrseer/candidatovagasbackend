@@ -1,17 +1,18 @@
 package br.infnet.edu.gabrielj.backendcandidato.backendcandidato.controller;
 
-import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain.Candidato;
-import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain.Resposta;
-import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain.RespostaVaga;
-import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain.Usuario;
+import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain.*;
+import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.dto.RespostaVagaDto;
 import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.repository.LoginRepository;
 import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.repository.RespostaRepository;
 import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.repository.RespostaVagaRepository;
+import br.infnet.edu.gabrielj.backendcandidato.backendcandidato.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/respostaVaga")
@@ -22,6 +23,9 @@ public class RespostaVagaController {
 
     @Autowired
     RespostaRepository respostaRepository;
+
+    @Autowired
+    VagaRepository vagaRepository;
 
     @GetMapping
     List<RespostaVaga> list() {
@@ -73,16 +77,43 @@ public class RespostaVagaController {
     }
 
     @GetMapping("/respostas/{idCandidato}")
-    public ResponseEntity<List<RespostaVaga>> getVagasRespondidas
+    public ResponseEntity<List<RespostaVagaDto>> getVagasRespondidas
             (@PathVariable long idCandidato) {
 
         try {
-            //long id = Long.parseLong(idCandidato);
-            List<RespostaVaga> respostasDoCandidato =
-                    repository.findAllByCandidatoFk_IdUsuario(idCandidato);
-            if (respostasDoCandidato != null) {
-                return ResponseEntity.ok(respostasDoCandidato);
+            List<RespostaVagaDto> respostasDoCandidato = new ArrayList<>();
+            List<RespostaVaga> query = repository
+                    .findAllByCandidatoFk_IdUsuario(idCandidato);
+
+            for (int ii = 0; ii < query.size(); ii++) {
+                var resposta = query.get(ii);
+                var dto = new RespostaVagaDto(resposta.getIdRespostaVaga(),
+                        resposta.getVagaFk(), resposta.getCandidatoFk(),
+                        resposta.getRespostas());
+                respostasDoCandidato.add(dto);
             }
+
+            /*List<Vaga> vagas = new ArrayList<>();
+
+            System.out.println(vagas);
+            for (int ii = 0; ii < query.size(); ii++) {
+                RespostaVaga resposta = query.get(ii);
+                respostasDoCandidato.add(resposta);
+            }
+
+            for (int ii = 0; ii < query.size(); ii++) {
+                var currentResposta = query.get(ii);
+
+                var currentVaga = currentResposta.getVagaFk();
+                vagas.add(currentVaga);
+                respostasDoCandidato.get(ii).setVagaFk(currentVaga);
+            }*/
+
+            if (query == null) {
+                throw new Exception("");
+            }
+            System.out.println("AAAAAAAAAAAA" + respostasDoCandidato);
+            return ResponseEntity.ok(respostasDoCandidato);
         } catch (Exception e) {
             e.printStackTrace();
         }

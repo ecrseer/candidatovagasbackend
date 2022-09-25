@@ -1,5 +1,6 @@
 package br.infnet.edu.gabrielj.backendcandidato.backendcandidato.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "usuario")
 public class Usuario implements Serializable {
 

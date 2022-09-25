@@ -35,5 +35,9 @@ Content-Type: application/json
     "tipo": "C"
   },
   "respostas": "abcsd"
-
 }
+
+
+### get respostas do candidato
+GET http://localhost:8082/respostaVaga/respostas/1
+Content-Type: application/json
