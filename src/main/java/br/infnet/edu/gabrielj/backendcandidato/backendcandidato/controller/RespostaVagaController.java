@@ -59,8 +59,7 @@ public class RespostaVagaController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for (Resposta resposta :
-                respostaAvaga.getRespostas()) {
+        for (Resposta resposta : respostaAvaga.getRespostas()) {
 
             try {
                 var shallowResposta = new Resposta(resposta.getIdResposta(),

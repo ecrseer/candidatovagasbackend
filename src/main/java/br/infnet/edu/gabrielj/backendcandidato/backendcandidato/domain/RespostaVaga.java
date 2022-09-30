@@ -27,14 +27,15 @@ public class RespostaVaga implements Serializable {
     @JsonBackReference(value = "respostaVagas")
     private Vaga vagaFk;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "candidatoFk")
-    @JsonBackReference
+    @JsonBackReference(value = "candidatoResposta")
     private Candidato candidatoFk;
 
     @OneToMany(mappedBy = "respostaCriterioFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "respostaCriterioFk")
     private List<Resposta> respostas;
 
 }

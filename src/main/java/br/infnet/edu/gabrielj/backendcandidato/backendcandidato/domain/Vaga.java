@@ -37,7 +37,7 @@ public class Vaga implements Serializable {
 
     @OneToMany(mappedBy = "vagaFk", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "respostaVagas")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     List<RespostaVaga> respostaVagas;
 
