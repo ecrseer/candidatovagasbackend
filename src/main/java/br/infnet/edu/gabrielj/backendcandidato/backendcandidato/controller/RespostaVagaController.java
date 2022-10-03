@@ -48,27 +48,29 @@ public class RespostaVagaController {
     }*/
 
     @PostMapping("/responder")
-    public ResponseEntity<RespostaVaga> salvaResposta(@RequestBody RespostaVaga respostaAvaga) {
-        var shallowClone = new RespostaVaga(respostaAvaga.getIdRespostaVaga(),
+    public ResponseEntity<RespostaVaga> salvaResposta(@RequestBody RespostaVagaDto respostaAvaga) {
+        RespostaVaga shallowClone = new RespostaVaga(respostaAvaga.getIdRespostaVaga(),
                 respostaAvaga.getVagaFk(),
                 respostaAvaga.getCandidatoFk(), null);
 
 
         try {
-            RespostaVaga saved = repository.save(respostaAvaga);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (Resposta resposta : respostaAvaga.getRespostas()) {
+            RespostaVaga saved = repository.save(shallowClone);
 
-            try {
-                var shallowResposta = new Resposta(resposta.getIdResposta(),
-                        resposta.getCriterioFk(), resposta.getConhecimento(), null);
-                respostaRepository.save(resposta);
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (Resposta resposta : respostaAvaga.getRespostas()) {
+
+                try {
+                    var shallowResposta = new Resposta(resposta.getIdResposta(),
+                            resposta.getCriterioFk(), resposta.getConhecimento(), saved);
+                    respostaRepository.save(shallowResposta);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

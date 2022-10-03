@@ -30,7 +30,7 @@ public class RespostaVagaDto
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Candidato candidatoFk;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
     private List<Resposta> respostas;
 
 
